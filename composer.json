@@ -5,5 +5,9 @@
         "psr-4": {
             "BasicApp\\Api\\" : ""
         }
+    },
+    "require": {
+        "basic-app/action" : "*",
+        "basic-app/controller" : "*"
     }
 }
