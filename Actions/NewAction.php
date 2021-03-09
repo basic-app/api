@@ -12,7 +12,7 @@ class NewAction extends \BasicApp\Action\BaseAction
             $data = $this->model->createEntity($this->request->getGet());
 
             return $this->respond([
-                'fields' => $data->toArray()
+                'data' => $data->toArray()
             ]);
         };
     }
