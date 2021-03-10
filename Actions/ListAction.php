@@ -9,7 +9,16 @@ class ListAction extends \BasicApp\Action\BaseAction
     {
         return function($method)
         {
-            return $this->respond($this->model->findAll());
+            if ($this->model->allowedFields)
+            {
+                $this->model->select($this->model->allowedFields);
+            }
+
+            $elements = $this->model->findAll();
+
+            return $this->respond([
+                'elements' => $elements
+            ]);
         };
     }
 

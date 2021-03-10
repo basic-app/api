@@ -11,6 +11,11 @@ class ShowAction extends \BasicApp\Action\BaseAction
     {
         return function($method, $id)
         {
+            if ($this->model->allowedFields)
+            {
+                $this->model->select($this->model->allowedFields);
+            }
+
             $data = $this->model->find((int) $id);
 
             if (!$data)
