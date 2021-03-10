@@ -15,7 +15,9 @@ class CreateAction extends \BasicApp\Action\BaseAction
 
             $errors = [];
 
-            $data->fill($this->request->getPost());
+            $body = $this->request->getJSON(true);
+
+            $data->fill($body);
 
             if ($this->model->save($data->toArray()))
             {
