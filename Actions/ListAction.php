@@ -9,7 +9,7 @@ class ListAction extends \BasicApp\Action\BaseAction
     {
         return function($method)
         {
-            return get_class($this);
+            return $this->respond($this->model->findAll());
         };
     }
 
