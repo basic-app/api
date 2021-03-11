@@ -24,4 +24,17 @@ trait ControllerTester
         return $this->withRequest($request);
     }
 
+    public function executeJSON(string $action)
+    {
+        $result = $this->execute($action);
+
+        $this->assertTrue($result->isOK(), '$result->isOK()');
+
+        $body = json_decode($result->response()->getJSON(), true);
+
+        $this->assertTrue(is_array($body), 'is_array($body)');
+
+        return $body;
+    }
+
 }
