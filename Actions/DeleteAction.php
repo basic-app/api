@@ -11,16 +11,23 @@ class DeleteAction extends \BasicApp\Action\BaseAction
     {
         return function($method, $id)
         {
+            assert($id ? true : false);
+
             $data = $this->model->find($id);
 
             if (!$data)
             {
-                throw PageNotFoundException::forPageNotFound();
+                return $this->failNotFound();
             }
 
             $result = $this->model->deleteEntity($data);
 
-            return $this->respond(['result' => $result]);
+            assert($result);
+
+            return $this->respondDeleted([
+                'code' => $this->codes['deleted'],
+                'message' => "DELETED"
+            ]);
         };
     }
 

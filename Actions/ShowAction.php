@@ -20,7 +20,7 @@ class ShowAction extends \BasicApp\Action\BaseAction
 
             if (!$data)
             {
-                throw PageNotFoundException::forPageNotFound();
+                return $this->failNotFound();
             }
 
             return $this->respond(['data' => $data->toArray()]);

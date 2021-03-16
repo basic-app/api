@@ -21,8 +21,17 @@ class CreateAction extends \BasicApp\Action\BaseAction
 
             if ($this->model->save($data->toArray()))
             {
-                return $this->respond([
-                    'insertID' => $this->model->insertID()
+                $id = $this->model->insertID();
+
+                assert($id ? true : false);
+
+                $data = $this->model->find($id);
+
+                assert($data ? true : false);
+
+                return $this->respondCreated([
+                    'insertID' => $id,
+                    'data' => $data->toArray()
                 ]);
             }
         
@@ -30,7 +39,7 @@ class CreateAction extends \BasicApp\Action\BaseAction
                 'data' => $data->toArray(),
                 'validationErrors' => (array) $this->model->errors(),
                 'errors' => $errors
-            ]);
+            ], $this->codes['invalid_data']);
         };
     }
 

@@ -7,9 +7,41 @@ class UpdateAction extends \BasicApp\Action\BaseAction
 
     public function _remap($method, ...$params)
     {
-        return function($method)
+        return function($method, $id)
         {
-            return get_class($this);
+            assert($id ? true : false);
+
+            $data = $this->model->find($id);
+
+            if (!$data)
+            {
+                return $this->failNotFound();
+            }
+
+            $validationErrors = [];
+
+            $errors = [];
+
+            $body = $this->request->getJSON(true);
+
+            $data->fill($body);
+
+            if ($this->model->save($data->toArray()))
+            {
+                $data = $this->model->find($id);
+
+                assert($data ? true : false);
+
+                return $this->respondUpdated([
+                    'data' => $data->toArray()
+                ]);
+            }
+        
+            return $this->respond([
+                'data' => $data->toArray(),
+                'validationErrors' => (array) $this->model->errors(),
+                'errors' => $errors
+            ], $this->codes['invalid_data']);
         };
     }
 
