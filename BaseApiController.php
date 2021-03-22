@@ -40,7 +40,7 @@ class BaseApiController extends \CodeIgniter\RESTful\ResourceController
 
     public function deleteModel($id = null, bool $purge = false)
     {
-        return $this->model($id, $purge);
+        return $this->model->delete($id, $purge);
     }
 
     /**

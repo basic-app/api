@@ -20,7 +20,9 @@ class DeleteAction extends BaseAction
                 return $this->failNotFound();
             }
 
-            $result = $this->model->deleteModel($data);
+            $primaryKey = $this->model->primaryKey;
+
+            $result = $this->deleteModel($data->$primaryKey);
 
             assert($result);
 
