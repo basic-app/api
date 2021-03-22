@@ -2,7 +2,7 @@
 
 namespace BasicApp\Api\Actions;
 
-class NewAction extends \BasicApp\Action\BaseAction
+class NewAction extends BaseAction
 {
 
     public function _remap($method, ...$params)

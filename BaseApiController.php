@@ -9,6 +9,8 @@ class BaseApiController extends \CodeIgniter\RESTful\ResourceController
 
     use ActionsTrait;
 
+    const ACTION_CREATE = 'BasicApp\Api\Actions\CreateAction';
+
     protected $format = 'json';
 
     protected $defaultActions = [
@@ -20,6 +22,26 @@ class BaseApiController extends \CodeIgniter\RESTful\ResourceController
         'edit' => 'BasicApp\Api\Actions\EditAction',
         'delete' => 'BasicApp\Api\Actions\DeleteAction'
     ];
+
+    protected function saveModel($data) : bool
+    {
+        return $this->model->save($data);
+    }
+
+    protected function findModel($id = null)
+    {
+        return $this->model->find($id);
+    }
+
+    protected function findAllModel(int $limit = 0, int $offset = 0)
+    {
+        return $this->model->findAll($limit, $offset);
+    }
+
+    public function deleteModel($id = null, bool $purge = false)
+    {
+        return $this->model($id, $purge);
+    }
 
     /**
      * Return an array of resource objects, themselves in array format

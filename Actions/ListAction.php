@@ -2,19 +2,14 @@
 
 namespace BasicApp\Api\Actions;
 
-class ListAction extends \BasicApp\Action\BaseAction
+class ListAction extends BaseAction
 {
 
     public function _remap($method, ...$params)
     {
         return function($method)
         {
-            if ($this->model->allowedFields)
-            {
-                $this->model->select($this->model->allowedFields);
-            }
-
-            $elements = $this->model->findAll();
+            $elements = $this->findAllModel();
 
             return $this->respond([
                 'elements' => $elements

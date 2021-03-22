@@ -2,7 +2,7 @@
 
 namespace BasicApp\Api\Actions;
 
-class UpdateAction extends \BasicApp\Action\BaseAction
+class UpdateAction extends BaseAction
 {
 
     public function _remap($method, ...$params)
@@ -11,7 +11,7 @@ class UpdateAction extends \BasicApp\Action\BaseAction
         {
             assert($id ? true : false);
 
-            $data = $this->model->find($id);
+            $data = $this->findModel($id);
 
             if (!$data)
             {
@@ -26,9 +26,9 @@ class UpdateAction extends \BasicApp\Action\BaseAction
 
             $data->fill($body);
 
-            if ($this->model->save($data->toArray()))
+            if ($this->saveModel($data->toArray()))
             {
-                $data = $this->model->find($id);
+                $data = $this->findModel($id);
 
                 assert($data ? true : false);
 

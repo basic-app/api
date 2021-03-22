@@ -2,7 +2,7 @@
 
 namespace BasicApp\Api\Actions;
 
-class CreateAction extends \BasicApp\Action\BaseAction
+class CreateAction extends BaseAction
 {
 
     public function _remap($method, ...$params)
@@ -19,16 +19,16 @@ class CreateAction extends \BasicApp\Action\BaseAction
 
             $data->fill($body);
 
-            if ($this->model->save($data->toArray()))
+            if ($this->saveModel($data->toArray()))
             {
                 $id = $this->model->insertID();
 
                 assert($id ? true : false);
 
-                $data = $this->model->find($id);
+                $data = $this->findModel($id);
 
                 assert($data ? true : false);
-
+            
                 return $this->respondCreated([
                     'insertID' => $id,
                     'data' => $data->toArray()

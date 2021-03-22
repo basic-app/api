@@ -2,19 +2,16 @@
 
 namespace BasicApp\Api\Actions;
 
-class EditAction extends \BasicApp\Action\BaseAction
+class EditAction extends BaseAction
 {
 
     public function _remap($method, ...$params)
     {
         return function($method, $id)
         {
-            if ($this->model->allowedFields)
-            {
-                $this->model->select($this->model->allowedFields);
-            }
+            assert($id ? true : false);
 
-            $data = $this->model->find((int) $id);
+            $data = $this->findModel($id);
 
             if (!$data)
             {

@@ -7,6 +7,7 @@ use Throwable;
 use InvalidArgumentException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\Test\ControllerResponse;
+use CodeIgniter\HTTP\Response;
 
 abstract class BaseTestController extends \Tests\Support\DatabaseTestCase
 {
@@ -57,7 +58,11 @@ abstract class BaseTestController extends \Tests\Support\DatabaseTestCase
             //
             //---------------------------------------------------------
         
-            $result->response()->setStatusCode(500);
+            //$result->response()->setStatusCode(500);
+
+            //$response = $e->getMessage() . PHP_EOL . PHP_EOL . $e->getTraceAsString();
+        
+            throw $e;
         }
         finally
         {
