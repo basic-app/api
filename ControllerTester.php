@@ -5,7 +5,7 @@ namespace BasicApp\Api;
 trait ControllerTester
 {
 
-    public function withJsonBody($body)
+    public function withJSON($body)
     {
         return $this->withBody(json_encode($body));
     }
