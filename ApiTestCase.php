@@ -12,13 +12,14 @@ use InvalidArgumentException;
 use CodeIgniter\HTTP\Exceptions\HTTPException;
 use CodeIgniter\Test\ControllerResponse;
 use CodeIgniter\HTTP\Response;
+use CodeIgniter\Test\ControllerTester;
 
-abstract class BaseTestController extends \Tests\Support\DatabaseTestCase
+class ApiTestCase extends \Tests\Support\DatabaseTestCase
 {
 
-    use \CodeIgniter\Test\ControllerTester;
-
     use ControllerTester;
+
+    use ControllerTesterTrait;
 
     /**
      * Runs the specified method on the controller and returns the results.

@@ -6,7 +6,7 @@
  */
 namespace BasicApp\Api;
 
-trait ControllerTester
+trait ControllerTesterTrait
 {
 
     public function withJSON($body)

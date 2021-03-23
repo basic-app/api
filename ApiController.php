@@ -9,13 +9,12 @@ namespace BasicApp\Api;
 use BasicApp\Action\ActionControllerTrait;
 use BasicApp\Model\ModelControllerTrait;
 
-class BaseApiController extends \CodeIgniter\RESTful\ResourceController
+class ApiController extends \CodeIgniter\RESTful\ResourceController
 {
 
     use ActionControllerTrait;
+    
     use ModelControllerTrait;
-
-    const ACTION_CREATE = 'BasicApp\Api\Actions\CreateAction';
 
     protected $format = 'json';
 
