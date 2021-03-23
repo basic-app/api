@@ -11,18 +11,22 @@ class DeleteAction extends BaseAction
     {
         return function($method, $id)
         {
+            assert($this->model ? true : false);
+            
             assert($id ? true : false);
 
-            $data = $this->findModel($id);
+            $data = $this->modelFind($id);
 
             if (!$data)
             {
                 return $this->failNotFound();
             }
 
-            $primaryKey = $this->model->primaryKey;
+            $id = $this->modelIdValue($data);
 
-            $result = $this->deleteModel($data->$primaryKey);
+            assert($id ? true : false);
+
+            $result = $this->modelDelete($id);
 
             assert($result);
 

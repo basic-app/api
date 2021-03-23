@@ -9,9 +9,11 @@ class UpdateAction extends BaseAction
     {
         return function($method, $id)
         {
+            assert($this->model ? true : false);
+            
             assert($id ? true : false);
 
-            $data = $this->findModel($id);
+            $data = $this->modelFind($id);
 
             if (!$data)
             {
@@ -26,9 +28,9 @@ class UpdateAction extends BaseAction
 
             $data->fill($body);
 
-            if ($this->saveModel($data->toArray()))
+            if ($this->modelSave($data->toArray()))
             {
-                $data = $this->findModel($id);
+                $data = $this->modelFind($id);
 
                 assert($data ? true : false);
 
@@ -39,7 +41,7 @@ class UpdateAction extends BaseAction
         
             return $this->respond([
                 'data' => $data->toArray(),
-                'validationErrors' => (array) $this->model->errors(),
+                'validationErrors' => (array) $this->modelErrors(),
                 'errors' => $errors
             ], $this->codes['invalid_data']);
         };

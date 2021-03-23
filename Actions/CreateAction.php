@@ -9,6 +9,8 @@ class CreateAction extends BaseAction
     {
         return function($method)
         {
+            assert($this->model ? true : false);
+
             $data = $this->model->createEntity($this->request->getGet());
 
             $validationErrors = [];
@@ -19,13 +21,13 @@ class CreateAction extends BaseAction
 
             $data->fill($body);
 
-            if ($this->saveModel($data->toArray()))
+            if ($this->modelSave($data->toArray()))
             {
-                $id = $this->model->insertID();
+                $id = $this->modelInsertID();
 
                 assert($id ? true : false);
 
-                $data = $this->findModel($id);
+                $data = $this->modelFind($id);
 
                 assert($data ? true : false);
             
@@ -37,7 +39,7 @@ class CreateAction extends BaseAction
         
             return $this->respond([
                 'data' => $data->toArray(),
-                'validationErrors' => (array) $this->model->errors(),
+                'validationErrors' => (array) $this->modelErrors(),
                 'errors' => $errors
             ], $this->codes['invalid_data']);
         };

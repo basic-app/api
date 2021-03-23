@@ -11,16 +11,20 @@ class ShowAction extends BaseAction
     {
         return function($method, $id)
         {
+            assert($this->model ? true : false);
+            
             assert($id ? true : false);
 
-            $data = $this->findModel($id);
+            $data = $this->modelFind($id);
 
             if (!$data)
             {
                 return $this->failNotFound();
             }
 
-            return $this->respond(['data' => $data->toArray()]);
+            return $this->respond([
+                'data' => $data->toArray()
+            ]);
         };
     }
 

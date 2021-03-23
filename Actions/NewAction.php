@@ -9,6 +9,8 @@ class NewAction extends BaseAction
     {
         return function($method)
         {
+            assert($this->model ? true : false);
+            
             $data = $this->model->createEntity($this->request->getGet());
 
             return $this->respond([

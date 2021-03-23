@@ -9,7 +9,9 @@ class ListAction extends BaseAction
     {
         return function($method)
         {
-            $elements = $this->findAllModel();
+            assert($this->model ? true : false);
+            
+            $elements = $this->modelFindAll();
 
             return $this->respond([
                 'elements' => $elements
