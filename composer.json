@@ -3,11 +3,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "BasicApp\\Api\\" : ""
+            "BasicApp\\API\\" : ""
         }
-    },
-    "require": {
-        "basic-app/action" : "*",
-        "basic-app/controller" : "*"
     }
 }
